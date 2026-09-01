@@ -1,0 +1,77 @@
+{
+  "name": "technique",
+  "label": "Technique",
+  "description": "Sombre par défaut, jeux de monospace, accent pétrole. L'esthétique des outils de développeur.",
+  "usage": "SaaS techniques, API, tableaux de bord, produits vendus à des développeurs.",
+  "typography": {
+    "display": {
+      "family": "Chivo Mono",
+      "stack": "\"Chivo Mono\", \"IBM Plex Mono\", monospace",
+      "weights": [
+        500,
+        700
+      ],
+      "googleFont": true
+    },
+    "body": {
+      "family": "IBM Plex Sans",
+      "stack": "\"IBM Plex Sans\", system-ui, sans-serif",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "googleFont": true
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", Consolas, monospace",
+      "weights": [
+        400,
+        500
+      ],
+      "googleFont": true
+    },
+    "scale": 1.22,
+    "baseSize": "15px",
+    "displayTracking": "-0.01em",
+    "displayWeight": 700
+  },
+  "shape": {
+    "radius": "4px",
+    "radiusLg": "8px",
+    "border": "1px",
+    "density": "compact",
+    "shadow": "subtle"
+  },
+  "color": {
+    "light": {
+      "bg": "#F5F7F8",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#EAEEF0",
+      "text": "#101619",
+      "textMuted": "#51616A",
+      "border": "#C3CDD2",
+      "borderStrong": "#7E8B92",
+      "accent": "#0B5A66",
+      "onAccent": "#FFFFFF",
+      "ok": "#1C6B45",
+      "warn": "#775200",
+      "danger": "#A82B2B"
+    },
+    "dark": {
+      "bg": "#0B1013",
+      "surface": "#131B1F",
+      "surfaceAlt": "#1A252A",
+      "text": "#E6EDF0",
+      "textMuted": "#9BAAB2",
+      "border": "#2C3A41",
+      "borderStrong": "#66757D",
+      "accent": "#4FC3D4",
+      "onAccent": "#04191D",
+      "ok": "#69C494",
+      "warn": "#DDB05A",
+      "danger": "#F08D8D"
+    }
+  }
+}

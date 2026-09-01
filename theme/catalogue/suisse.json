@@ -1,0 +1,75 @@
+{
+  "name": "suisse",
+  "label": "Suisse",
+  "description": "Grille stricte, typographie neutre, un seul rouge de signal. La direction la plus sobre du catalogue.",
+  "usage": "Cabinets de conseil, institutions, portfolios exigeants — quand le contenu doit passer avant l'habillage.",
+  "typography": {
+    "display": {
+      "family": "Archivo",
+      "stack": "\"Archivo\", \"Helvetica Neue\", Arial, sans-serif",
+      "weights": [
+        600,
+        700
+      ],
+      "googleFont": true
+    },
+    "body": {
+      "family": "Archivo",
+      "stack": "\"Archivo\", \"Helvetica Neue\", Arial, sans-serif",
+      "weights": [
+        400,
+        500
+      ],
+      "googleFont": true
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", Consolas, monospace",
+      "weights": [
+        400
+      ],
+      "googleFont": true
+    },
+    "scale": 1.25,
+    "baseSize": "16px",
+    "displayTracking": "-0.022em",
+    "displayWeight": 700
+  },
+  "shape": {
+    "radius": "2px",
+    "radiusLg": "3px",
+    "border": "1px",
+    "density": "normal",
+    "shadow": "none"
+  },
+  "color": {
+    "light": {
+      "bg": "#FFFFFF",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#F1F1F1",
+      "text": "#111111",
+      "textMuted": "#55595C",
+      "border": "#C4C4C4",
+      "borderStrong": "#8C8C8C",
+      "accent": "#C0102A",
+      "onAccent": "#FFFFFF",
+      "ok": "#1F6B41",
+      "warn": "#7A5300",
+      "danger": "#B31A1A"
+    },
+    "dark": {
+      "bg": "#0C0C0D",
+      "surface": "#161617",
+      "surfaceAlt": "#1F1F21",
+      "text": "#F2F2F2",
+      "textMuted": "#A9ACAF",
+      "border": "#3A3A3D",
+      "borderStrong": "#6E6E72",
+      "accent": "#FF7A88",
+      "onAccent": "#2A0508",
+      "ok": "#6FCB97",
+      "warn": "#E0B457",
+      "danger": "#FF8A8A"
+    }
+  }
+}

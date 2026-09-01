@@ -1,0 +1,39 @@
+{
+  "name": "fabrique-socle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Socle technique de la Fabrique de Sites — template Next.js piloté par agents, avec design tokens interchangeables et garde-fous en CI.",
+  "scripts": {
+    "predev": "node scripts/build-tokens.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/build-tokens.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "theme:build": "node scripts/build-tokens.mjs",
+    "theme:check": "node scripts/check-contrast.mjs",
+    "theme:list": "node scripts/list-themes.mjs",
+    "test:e2e": "playwright test",
+    "verify": "npm run theme:check && npm run typecheck && npm run build",
+    "qa:visuelle": "node scripts/qa-visuelle.mjs",
+    "test:apparence": "playwright test apparence"
+  },
+  "dependencies": {
+    "next": "15.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "@sentry/nextjs": "^10.12.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.13",
+    "@tailwindcss/postcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "playwright": "^1.56.0"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "name": "brutaliste",
+  "label": "Brutaliste",
+  "description": "Bordures épaisses, aucun arrondi, jaune de signal, titrage massif. Assumé et mémorable.",
+  "usage": "Marques créatives, événements, produits qui veulent qu'on se souvienne d'eux plutôt qu'on les trouve rassurants.",
+  "typography": {
+    "display": {
+      "family": "Anton",
+      "stack": "\"Anton\", \"Arial Black\", Impact, sans-serif",
+      "weights": [
+        400
+      ],
+      "googleFont": true
+    },
+    "body": {
+      "family": "DM Sans",
+      "stack": "\"DM Sans\", system-ui, sans-serif",
+      "weights": [
+        400,
+        500,
+        700
+      ],
+      "googleFont": true
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", Consolas, monospace",
+      "weights": [
+        400,
+        500
+      ],
+      "googleFont": true
+    },
+    "scale": 1.35,
+    "baseSize": "16px",
+    "displayTracking": "0.005em",
+    "displayWeight": 400
+  },
+  "shape": {
+    "radius": "0px",
+    "radiusLg": "0px",
+    "border": "2px",
+    "density": "normal",
+    "shadow": "lifted"
+  },
+  "color": {
+    "light": {
+      "bg": "#FAF7EF",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#F0EADA",
+      "text": "#0A0A0A",
+      "textMuted": "#4A4A45",
+      "border": "#0A0A0A",
+      "borderStrong": "#0A0A0A",
+      "accent": "#7A4A00",
+      "onAccent": "#FFF6E0",
+      "ok": "#1A5F3C",
+      "warn": "#6E4A00",
+      "danger": "#9E1F1F"
+    },
+    "dark": {
+      "bg": "#0A0A08",
+      "surface": "#141410",
+      "surfaceAlt": "#1E1E17",
+      "text": "#F7F4E8",
+      "textMuted": "#ADAA9B",
+      "border": "#F7F4E8",
+      "borderStrong": "#F7F4E8",
+      "accent": "#F5C13D",
+      "onAccent": "#1A1200",
+      "ok": "#77C79A",
+      "warn": "#F5C13D",
+      "danger": "#F58A8A"
+    }
+  }
+}

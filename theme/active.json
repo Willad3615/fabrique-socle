@@ -1,0 +1,5 @@
+{
+  "$comment": "La direction artistique de CE site. C'est le seul fichier à changer pour changer tout le style. Valeurs possibles : voir theme/catalogue/ ou `npm run theme:list`.",
+  "direction": "corporate-calme",
+  "overrides": {}
+}

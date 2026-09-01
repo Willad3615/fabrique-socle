@@ -1,0 +1,75 @@
+{
+  "name": "corporate-calme",
+  "label": "Corporate calme",
+  "description": "Bleu sobre, espacements généreux, aucune aspérité. La direction la plus consensuelle du catalogue.",
+  "usage": "PME, cabinets, sites institutionnels, offres B2B qui doivent inspirer confiance sans surprendre.",
+  "typography": {
+    "display": {
+      "family": "Figtree",
+      "stack": "\"Figtree\", system-ui, sans-serif",
+      "weights": [
+        600,
+        700
+      ],
+      "googleFont": true
+    },
+    "body": {
+      "family": "Source Sans 3",
+      "stack": "\"Source Sans 3\", system-ui, sans-serif",
+      "weights": [
+        400,
+        600
+      ],
+      "googleFont": true
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", Consolas, monospace",
+      "weights": [
+        400
+      ],
+      "googleFont": true
+    },
+    "scale": 1.24,
+    "baseSize": "16px",
+    "displayTracking": "-0.018em",
+    "displayWeight": 700
+  },
+  "shape": {
+    "radius": "8px",
+    "radiusLg": "14px",
+    "border": "1px",
+    "density": "comfortable",
+    "shadow": "soft"
+  },
+  "color": {
+    "light": {
+      "bg": "#F7F9FC",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#EDF2F8",
+      "text": "#111C29",
+      "textMuted": "#4F5F72",
+      "border": "#C9D5E3",
+      "borderStrong": "#7C8CA0",
+      "accent": "#1A4E8A",
+      "onAccent": "#FFFFFF",
+      "ok": "#1C6B45",
+      "warn": "#7A5200",
+      "danger": "#A82B2B"
+    },
+    "dark": {
+      "bg": "#0C121A",
+      "surface": "#141D28",
+      "surfaceAlt": "#1B2733",
+      "text": "#E7EDF4",
+      "textMuted": "#9CACBE",
+      "border": "#2A3846",
+      "borderStrong": "#647688",
+      "accent": "#71B0F0",
+      "onAccent": "#06182C",
+      "ok": "#6FC395",
+      "warn": "#DDAF57",
+      "danger": "#F08D8D"
+    }
+  }
+}

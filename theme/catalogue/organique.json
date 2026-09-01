@@ -1,0 +1,75 @@
+{
+  "name": "organique",
+  "label": "Organique",
+  "description": "Terres cuites et verts doux, formes arrondies, respiration. Chaleureux sans être enfantin.",
+  "usage": "Artisans, alimentation, bien-être, associations, tout ce qui parle de terrain et de proximité.",
+  "typography": {
+    "display": {
+      "family": "Gabarito",
+      "stack": "\"Gabarito\", system-ui, sans-serif",
+      "weights": [
+        600,
+        700
+      ],
+      "googleFont": true
+    },
+    "body": {
+      "family": "Nunito Sans",
+      "stack": "\"Nunito Sans\", system-ui, sans-serif",
+      "weights": [
+        400,
+        600
+      ],
+      "googleFont": true
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", Consolas, monospace",
+      "weights": [
+        400
+      ],
+      "googleFont": true
+    },
+    "scale": 1.26,
+    "baseSize": "16.5px",
+    "displayTracking": "-0.015em",
+    "displayWeight": 700
+  },
+  "shape": {
+    "radius": "12px",
+    "radiusLg": "22px",
+    "border": "1px",
+    "density": "comfortable",
+    "shadow": "soft"
+  },
+  "color": {
+    "light": {
+      "bg": "#FAF6F1",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#F1E9DF",
+      "text": "#22201C",
+      "textMuted": "#5E574E",
+      "border": "#D8CCBE",
+      "borderStrong": "#8B8073",
+      "accent": "#8A4318",
+      "onAccent": "#FFF6EE",
+      "ok": "#3B6B36",
+      "warn": "#7A5200",
+      "danger": "#A32F26"
+    },
+    "dark": {
+      "bg": "#15120F",
+      "surface": "#1E1A16",
+      "surfaceAlt": "#282219",
+      "text": "#F1EAE1",
+      "textMuted": "#ADA396",
+      "border": "#3B342B",
+      "borderStrong": "#7A7062",
+      "accent": "#E39A6A",
+      "onAccent": "#241004",
+      "ok": "#7FC086",
+      "warn": "#DFB05A",
+      "danger": "#F1918A"
+    }
+  }
+}

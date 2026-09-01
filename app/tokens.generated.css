@@ -1,0 +1,86 @@
+/* ------------------------------------------------------------------
+ * FICHIER GÉNÉRÉ — ne pas modifier à la main.
+ * Source : theme/active.json -> theme/catalogue/corporate-calme.json
+ * Régénérer : npm run theme:build
+ * ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Palette — mode clair */
+  --c-bg: #F7F9FC;
+  --c-surface: #FFFFFF;
+  --c-surface-alt: #EDF2F8;
+  --c-text: #111C29;
+  --c-text-muted: #4F5F72;
+  --c-border: #C9D5E3;
+  --c-border-strong: #7C8CA0;
+  --c-accent: #1A4E8A;
+  --c-on-accent: #FFFFFF;
+  --c-ok: #1C6B45;
+  --c-warn: #7A5200;
+  --c-danger: #A82B2B;
+
+  /* Typographie */
+  --f-display: "Figtree", system-ui, sans-serif;
+  --f-body: "Source Sans 3", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", Consolas, monospace;
+  --f-root-size: 16px;
+  --f-display-weight: 700;
+  --f-display-tracking: -0.018em;
+  --fs-xs: 0.6504rem;
+  --fs-sm: 0.8065rem;
+  --fs-base: 1.0000rem;
+  --fs-lg: 1.2400rem;
+  --fs-xl: 1.5376rem;
+  --fs-2xl: 1.9066rem;
+  --fs-3xl: 2.3642rem;
+  --fs-4xl: 2.9316rem;
+
+  /* Formes */
+  --rad: 8px;
+  --rad-lg: 14px;
+  --bw: 1px;
+
+  /* Unité d'espacement, pilotée par la densité « comfortable » */
+  --sp-unit: 0.2875rem;
+
+  /* Ombres */
+  --sh-sm: 0 1px 2px color-mix(in srgb, var(--c-text) 8%, transparent);
+  --sh-md: 0 2px 6px color-mix(in srgb, var(--c-text) 9%, transparent), 0 10px 26px -12px color-mix(in srgb, var(--c-text) 28%, transparent);
+  --sh-lg: 0 4px 10px color-mix(in srgb, var(--c-text) 10%, transparent), 0 24px 50px -20px color-mix(in srgb, var(--c-text) 34%, transparent);
+}
+
+/* Mode sombre par préférence système, sauf choix explicite du visiteur. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-bg: #0C121A;
+    --c-surface: #141D28;
+    --c-surface-alt: #1B2733;
+    --c-text: #E7EDF4;
+    --c-text-muted: #9CACBE;
+    --c-border: #2A3846;
+    --c-border-strong: #647688;
+    --c-accent: #71B0F0;
+    --c-on-accent: #06182C;
+    --c-ok: #6FC395;
+    --c-warn: #DDAF57;
+    --c-danger: #F08D8D;
+  }
+}
+
+/* Mode sombre par choix explicite du visiteur. */
+:root[data-theme="dark"] {
+  --c-bg: #0C121A;
+  --c-surface: #141D28;
+  --c-surface-alt: #1B2733;
+  --c-text: #E7EDF4;
+  --c-text-muted: #9CACBE;
+  --c-border: #2A3846;
+  --c-border-strong: #647688;
+  --c-accent: #71B0F0;
+  --c-on-accent: #06182C;
+  --c-ok: #6FC395;
+  --c-warn: #DDAF57;
+  --c-danger: #F08D8D;
+}

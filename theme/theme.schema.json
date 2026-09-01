@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Direction artistique",
+  "description": "Décrit l'intégralité de l'identité visuelle d'un site. Changer de style = remplacer ce fichier. Aucun composant ne bouge.",
+  "type": "object",
+  "required": ["name", "label", "typography", "shape", "color"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "label": { "type": "string" },
+    "description": { "type": "string" },
+    "usage": { "type": "string", "description": "À qui / à quoi cette direction convient, en une phrase compréhensible par un non-technicien." },
+    "typography": {
+      "type": "object",
+      "required": ["display", "body"],
+      "additionalProperties": false,
+      "properties": {
+        "display": { "$ref": "#/definitions/face" },
+        "body": { "$ref": "#/definitions/face" },
+        "mono": { "$ref": "#/definitions/face" },
+        "scale": { "type": "number", "minimum": 1.1, "maximum": 1.5, "description": "Raison de l'échelle typographique." },
+        "baseSize": { "type": "string" },
+        "displayTracking": { "type": "string" },
+        "displayWeight": { "type": "integer" }
+      }
+    },
+    "shape": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "radius": { "type": "string" },
+        "radiusLg": { "type": "string" },
+        "border": { "type": "string" },
+        "density": { "enum": ["compact", "normal", "comfortable"] },
+        "shadow": { "enum": ["none", "subtle", "soft", "lifted"] }
+      }
+    },
+    "color": {
+      "type": "object",
+      "required": ["light", "dark"],
+      "additionalProperties": false,
+      "properties": {
+        "light": { "$ref": "#/definitions/palette" },
+        "dark": { "$ref": "#/definitions/palette" }
+      }
+    }
+  },
+  "definitions": {
+    "face": {
+      "type": "object",
+      "required": ["family", "stack"],
+      "additionalProperties": false,
+      "properties": {
+        "family": { "type": "string", "description": "Nom Google Fonts, ou null pour une pile système." },
+        "stack": { "type": "string", "description": "Pile de repli complète, obligatoire." },
+        "weights": { "type": "array", "items": { "type": "integer" } },
+        "googleFont": { "type": "boolean" }
+      }
+    },
+    "palette": {
+      "type": "object",
+      "required": ["bg", "surface", "surfaceAlt", "text", "textMuted", "border", "borderStrong", "accent", "onAccent", "ok", "warn", "danger"],
+      "additionalProperties": false,
+      "properties": {
+        "bg":         { "$ref": "#/definitions/hex", "description": "Fond de page." },
+        "surface":    { "$ref": "#/definitions/hex", "description": "Fond des cartes et panneaux." },
+        "surfaceAlt": { "$ref": "#/definitions/hex", "description": "Fond secondaire : en-têtes de tableau, zones calmes." },
+        "text":       { "$ref": "#/definitions/hex", "description": "Texte principal. Doit atteindre 4.5:1 sur bg ET surface." },
+        "textMuted":  { "$ref": "#/definitions/hex", "description": "Texte secondaire. Même exigence : 4.5:1." },
+        "border":       { "$ref": "#/definitions/hex", "description": "Filets décoratifs : séparateurs, contours de cartes. Aucun seuil bloquant." },
+        "borderStrong": { "$ref": "#/definitions/hex", "description": "Contour des composants interactifs : champs, boutons, focus. 3:1 minimum (WCAG 1.4.11)." },
+        "accent":     { "$ref": "#/definitions/hex", "description": "Couleur d'action. 4.5:1 sur bg (elle sert aussi de couleur de lien)." },
+        "onAccent":   { "$ref": "#/definitions/hex", "description": "Texte posé sur l'accent. 4.5:1 sur accent." },
+        "ok":         { "$ref": "#/definitions/hex" },
+        "warn":       { "$ref": "#/definitions/hex" },
+        "danger":     { "$ref": "#/definitions/hex" }
+      }
+    },
+    "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+  }
+}

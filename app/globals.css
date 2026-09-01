@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@import "./tokens.generated.css";
+
+/*
+ * Pont entre les jetons de la direction artistique (--c-, --f-, --fs-…) et le
+ * thème Tailwind. C'est ici — et nulle part ailleurs — que les deux se rencontrent.
+ *
+ * Conséquence pour le Builder : on écrit `bg-surface text-muted rounded-theme p-6`,
+ * jamais une couleur, une taille ou un rayon en dur. Changer theme/active.json
+ * change tout le site sans qu'une ligne de composant bouge.
+ */
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-alt: var(--c-surface-alt);
+  --color-ink: var(--c-text);
+  --color-muted: var(--c-text-muted);
+  --color-line: var(--c-border);
+  --color-line-strong: var(--c-border-strong);
+  --color-accent: var(--c-accent);
+  --color-on-accent: var(--c-on-accent);
+  --color-ok: var(--c-ok);
+  --color-warn: var(--c-warn);
+  --color-danger: var(--c-danger);
+
+  --font-display: var(--f-display);
+  --font-sans: var(--f-body);
+  --font-mono: var(--f-mono);
+
+  --text-xs: var(--fs-xs);
+  --text-sm: var(--fs-sm);
+  --text-base: var(--fs-base);
+  --text-lg: var(--fs-lg);
+  --text-xl: var(--fs-xl);
+  --text-2xl: var(--fs-2xl);
+  --text-3xl: var(--fs-3xl);
+  --text-4xl: var(--fs-4xl);
+
+  /* L'unité d'espacement vient de la densité de la direction artistique :
+     p-4, gap-6 et py-16 respirent ou se resserrent d'un seul coup. */
+  --spacing: var(--sp-unit);
+
+  --radius-theme: var(--rad);
+  --radius-theme-lg: var(--rad-lg);
+
+  --shadow-card: var(--sh-md);
+  --shadow-raised: var(--sh-lg);
+}
+
+/* Épaisseur de trait pilotée par la direction : `rule` remplace `border`. */
+@utility rule {
+  border-width: var(--bw);
+  border-style: solid;
+  border-color: var(--color-line);
+}
+@utility rule-t {
+  border-top-width: var(--bw);
+  border-top-style: solid;
+  border-color: var(--color-line);
+}
+@utility rule-strong {
+  border-width: var(--bw);
+  border-style: solid;
+  border-color: var(--color-line-strong);
+}
+
+@layer base {
+  html {
+    font-size: var(--f-root-size);
+  }
+
+  body {
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--f-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--f-display);
+    font-weight: var(--f-display-weight);
+    letter-spacing: var(--f-display-tracking);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  /* Le focus visible est une obligation d'accessibilité, pas une option de style.
+     Sa couleur passe le contrôle de contraste de `npm run theme:check`. */
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

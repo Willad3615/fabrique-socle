@@ -1,0 +1,75 @@
+{
+  "name": "editorial",
+  "label": "Éditorial",
+  "description": "Serif de titrage à fort caractère, colonne de lecture large, accent vert profond. Pensé pour le texte long.",
+  "usage": "Blogs, revues, sites d'auteur, associations qui publient beaucoup.",
+  "typography": {
+    "display": {
+      "family": "Fraunces",
+      "stack": "\"Fraunces\", Georgia, \"Times New Roman\", serif",
+      "weights": [
+        600,
+        700
+      ],
+      "googleFont": true
+    },
+    "body": {
+      "family": "Source Serif 4",
+      "stack": "\"Source Serif 4\", Georgia, serif",
+      "weights": [
+        400,
+        600
+      ],
+      "googleFont": true
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", Consolas, monospace",
+      "weights": [
+        400
+      ],
+      "googleFont": true
+    },
+    "scale": 1.28,
+    "baseSize": "17px",
+    "displayTracking": "-0.015em",
+    "displayWeight": 700
+  },
+  "shape": {
+    "radius": "3px",
+    "radiusLg": "6px",
+    "border": "1px",
+    "density": "comfortable",
+    "shadow": "subtle"
+  },
+  "color": {
+    "light": {
+      "bg": "#FCFAF6",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#F3EFE7",
+      "text": "#1D1B17",
+      "textMuted": "#5B564C",
+      "border": "#D9D2C4",
+      "borderStrong": "#8B8375",
+      "accent": "#1E5E3F",
+      "onAccent": "#FFFFFF",
+      "ok": "#1E5E3F",
+      "warn": "#7A5000",
+      "danger": "#A62828"
+    },
+    "dark": {
+      "bg": "#14130F",
+      "surface": "#1D1C17",
+      "surfaceAlt": "#262419",
+      "text": "#F0EDE5",
+      "textMuted": "#ADA79A",
+      "border": "#3B382E",
+      "borderStrong": "#736D5E",
+      "accent": "#77C79A",
+      "onAccent": "#08200F",
+      "ok": "#77C79A",
+      "warn": "#DBAE55",
+      "danger": "#EF8B8B"
+    }
+  }
+}
