@@ -1,0 +1,51 @@
+name: Demande de site
+description: Décrire un site à produire. Ce formulaire est normalement rempli par Claude à partir d'une conversation — le remplir à la main reste possible.
+title: "[Site] "
+labels: ["fabrique:brief"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Réponds avec tes mots. Aucune question ne demande de connaissance technique.
+  - type: input
+    id: nom
+    attributes:
+      label: Nom du site
+      placeholder: Association Numericli
+    validations: { required: true }
+  - type: textarea
+    id: objectif
+    attributes:
+      label: À quoi sert ce site ?
+      description: En deux ou trois phrases. Que doit-il se passer pour que le site soit un succès ?
+    validations: { required: true }
+  - type: textarea
+    id: public
+    attributes:
+      label: Qui va le visiter ?
+      description: Décris une personne type. Que cherche-t-elle en arrivant ?
+    validations: { required: true }
+  - type: textarea
+    id: pages
+    attributes:
+      label: Quelles pages ?
+      description: Une par ligne. Si tu ne sais pas, écris « à proposer ».
+    validations: { required: true }
+  - type: checkboxes
+    id: fonctions
+    attributes:
+      label: Le site doit-il faire l'une de ces choses ?
+      options:
+        - label: Recevoir des messages via un formulaire de contact
+        - label: Permettre à quelqu'un de modifier les textes après la mise en ligne
+        - label: Permettre de créer un compte et de se connecter
+        - label: Encaisser un paiement
+  - type: textarea
+    id: style
+    attributes:
+      label: Quel style ?
+      description: Un site que tu trouves réussi, une ambiance, une charte existante. « Je ne sais pas » est une réponse valable — une proposition te sera faite.
+  - type: input
+    id: echeance
+    attributes:
+      label: Pour quand ?
