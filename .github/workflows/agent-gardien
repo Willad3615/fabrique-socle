@@ -1,0 +1,43 @@
+name: Agent Gardien
+
+# La permanence réelle : passe toutes les six heures, ouvre des issues.
+# Ne corrige rien, ne fusionne rien, ne déploie rien.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  gardien:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+      id-token: write
+      actions: read
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Tu es le Gardien de la Fabrique de Sites, sur le dépôt ${{ github.repository }}.
+
+            Examine :
+            - les pull requests ouvertes depuis plus de 48 heures, et pourquoi elles sont bloquées ;
+            - les exécutions de workflow en échec depuis le dernier passage ;
+            - les issues portant le label `recette` sans réponse depuis plus de 48 heures.
+
+            Pour chaque problème réel, ouvre UNE issue avec le label `gardien`, en français,
+            décrivant le symptôme, ce qui est bloqué, et l'action attendue de la part d'un humain.
+            Avant d'ouvrir une issue, vérifie qu'une issue `gardien` ouverte ne décrit pas
+            déjà le même problème — dans ce cas, ajoute un commentaire à l'existante.
+
+            Si tout est normal, n'ouvre rien et écris simplement « Rien à signaler ».
+
+            Ne corrige aucun code. Ne fusionne aucune pull request. Ne déclenche aucun déploiement.
+          claude_args: |
+            --max-turns 15
+            --allowedTools "mcp__github__list_pull_requests,mcp__github__list_issues,mcp__github__search_issues,mcp__github__create_issue,mcp__github__add_issue_comment,mcp__github__list_workflow_runs"
