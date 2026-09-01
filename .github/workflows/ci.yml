@@ -1,0 +1,84 @@
+name: Contrôles
+
+# Ces contrôles sont requis par la règle de branche : une pull request ne peut pas
+# être fusionnée tant qu'ils ne sont pas verts. C'est le garde-fou qui remplace
+# la relecture ligne à ligne.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualite:
+    name: Style, types et build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Sans dépendance : ce contrôle doit pouvoir échouer vite et clairement.
+      - name: Accessibilité des directions artistiques
+        run: node scripts/check-contrast.mjs
+
+      - run: npm ci
+      - run: npm run theme:build
+      - run: npm run typecheck
+      - run: npm run build
+
+  parcours:
+    name: Parcours et accessibilité
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: qualite
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Rejouer les parcours du brief
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: rapport-parcours
+          path: playwright-report/
+          retention-days: 7
+
+  secrets:
+    name: Aucun secret dans le dépôt
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Chercher des clés en clair
+        run: |
+          set +e
+          motifs='sk_live_|pk_live_|rk_live_|SUPABASE_SERVICE_ROLE_KEY=.+|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|ghp_[A-Za-z0-9]{20,}|sk-ant-[A-Za-z0-9-]{20,}'
+          trouve=$(grep -rInE "$motifs" . \
+            --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.next \
+            --exclude='.env.example' --exclude='ci.yml')
+          if [ -n "$trouve" ]; then
+            echo "Des valeurs ressemblant à des secrets ont été trouvées :"
+            echo "$trouve"
+            echo ""
+            echo "Retire-les du dépôt et fais tourner la clé concernée : une clé poussée"
+            echo "reste dans l'historique git même après suppression."
+            exit 1
+          fi
+          echo "Aucun secret détecté."
