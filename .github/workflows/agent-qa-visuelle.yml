@@ -1,0 +1,105 @@
+name: Agent QA visuelle
+
+# Se déclenche quand Vercel a fini de publier une preview, pas avant : le runner
+# GitHub a un accès internet complet, donc c'est ici — et pas dans une session
+# Claude — que le navigateur peut réellement atteindre le site déployé.
+#
+# Produit trois choses :
+#   1. des captures multi-largeurs, en clair et en sombre, sur le site réellement déployé ;
+#   2. un audit d'accessibilité axe-core sur la page rendue ;
+#   3. un commentaire de pull request qui affiche les captures, plus un artefact
+#      téléchargeable et lisible par un agent via l'API GitHub.
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: read
+
+jobs:
+  captures:
+    # Uniquement sur une preview réussie. Les déploiements de production ne
+    # déclenchent pas la QA : à ce stade la décision est déjà prise.
+    if: |
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment != 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      URL: ${{ github.event.deployment_status.target_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      - name: Capturer et auditer
+        run: node scripts/qa-visuelle.mjs "$URL" qa-visuelle
+
+      - name: Publier les captures comme artefact
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: qa-visuelle
+          path: qa-visuelle/
+          retention-days: 14
+
+      - name: Retrouver la pull request concernée
+        id: pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sha = context.payload.deployment.sha;
+            const { data } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner, repo: context.repo.repo, commit_sha: sha,
+            });
+            const pr = data.find((p) => p.state === 'open');
+            core.setOutput('number', pr ? String(pr.number) : '');
+
+      - name: Commenter la pull request
+        if: steps.pr.outputs.number != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const rapport = JSON.parse(fs.readFileSync('qa-visuelle/rapport.json', 'utf8'));
+            const n = Number('${{ steps.pr.outputs.number }}');
+
+            const lignes = rapport.captures
+              .map((c) => `| ${c.page} | ${c.largeur} px | ${c.theme} | ${c.fichier} |`)
+              .join('\n');
+
+            const a11y = rapport.accessibilite.violations.length === 0
+              ? 'Aucune violation détectée automatiquement.'
+              : rapport.accessibilite.violations
+                  .map((v) => `- **${v.regle}** (${v.impact}) — ${v.description}\n  - ${v.elements.join('\n  - ')}`)
+                  .join('\n');
+
+            const corps = [
+              `### QA visuelle — [preview](${process.env.URL})`,
+              '',
+              `Fond de page opaque : ${rapport.fondOpaque ? 'oui' : '**non — la page emprunte le fond de son hôte**'}`,
+              `Titre \`h1\` unique : ${rapport.h1Unique ? 'oui' : '**non**'}`,
+              '',
+              '**Accessibilité**',
+              '',
+              a11y,
+              '',
+              '**Captures** — téléchargeables dans l\'artefact `qa-visuelle` de cette exécution.',
+              '',
+              '| Page | Largeur | Thème | Fichier |',
+              '| --- | --- | --- | --- |',
+              lignes,
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo, issue_number: n, body: corps,
+            });
