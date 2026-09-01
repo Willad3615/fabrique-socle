@@ -1,0 +1,53 @@
+name: Agent Architecte
+
+# Automatique : se déclenche quand une demande passe en « prête à produire ».
+# Lit le brief, choisit la direction artistique, attribue le niveau d'autonomie
+# et découpe la demande en sous-tickets implémentables. N'écrit aucun code.
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  architecte:
+    if: github.event.label.name == 'fabrique:go'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Tu es l'Architecte de la Fabrique de Sites.
+
+            Lis l'issue #${{ github.event.issue.number }} du dépôt ${{ github.repository }},
+            puis lis CLAUDE.md et theme/catalogue/ dans le dépôt.
+
+            Produis un commentaire sur cette issue, en français, contenant :
+
+            1. NIVEAU D'AUTONOMIE — N1 (vitrine, aucune donnée stockée),
+               N2 (contenu éditable, aucune donnée personnelle),
+               N3 (comptes et base de données), N4 (paiement).
+               Justifie en une phrase. En cas de doute entre deux niveaux, prends le plus élevé.
+            2. DIRECTION ARTISTIQUE recommandée parmi theme/catalogue/, avec une phrase
+               expliquant pourquoi elle convient à ce public — compréhensible par un non-technicien.
+            3. PAGES ET PARCOURS — la liste des pages et, pour chacune, ce qu'un visiteur
+               doit pouvoir y faire.
+            4. MODÈLE DE DONNÉES si N2 ou plus : tables, colonnes, et pour chaque table
+               la politique RLS attendue. Ne crée aucune table.
+            5. DÉCOUPAGE — 3 à 8 sous-tickets, chacun livrable indépendamment.
+               Crée-les avec le label `fabrique:construire`, en référençant cette issue.
+            6. QUESTIONS BLOQUANTES — ce que tu ne peux pas décider seul. S'il y en a,
+               ne crée aucun sous-ticket et pose les questions à la place.
+
+            N'écris aucun code, ne crée aucune branche, ne modifie aucun fichier.
+          claude_args: |
+            --max-turns 20
+            --allowedTools "Read,Glob,Grep,mcp__github__get_issue,mcp__github__add_issue_comment,mcp__github__create_issue,mcp__github__update_issue"
